@@ -10,19 +10,41 @@ public class MarkdownParse {
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
-        int currentIndex = 0;
-        while(currentIndex < markdown.length()) {
-            int openBracket = markdown.indexOf("[", currentIndex);
-            int closeBracket = markdown.indexOf("]", openBracket);
-            int openParen = markdown.indexOf("(", closeBracket);
-            int closeParen = markdown.indexOf(")", openParen);
-            if(openBracket == -1 || closeBracket == -1 || openParen == -1|| closeParen == -1){
-                System.out.println("Invalid input");
-                break;
-            }
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
+        if(markdown.length() == 0){
+            toReturn = null;
         }
+        else{
+            int currentIndex = 0;
+            // System.out.println(currentIndex);
+            while(currentIndex < markdown.length()) {
+                int openBracket = markdown.indexOf("[", currentIndex);
+                int closeBracket = markdown.indexOf("]", openBracket);
+                int openParen = markdown.indexOf("(", closeBracket);
+                int closeParen = markdown.indexOf(")", openParen);
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                currentIndex = closeParen + 1;
+                if(closeParen == -1){
+                    System.out.println("invalid input");
+                }
+                else if(closeBracket == -1){
+                    System.out.println("invalid input");
+                }
+                else if(openBracket == -1){
+                    System.out.println("invalid input");
+                }
+                else if(openParen == -1){
+                    System.out.println("invalid input");
+                }
+                break;
+                // System.out.println(currentIndex);
+            }
+            if(toReturn.size() == 0){
+                System.out.println("This file is empty");
+            }
+
+        }
+       
+        // System.out.println(currentIndex);
 
         return toReturn;
     }
