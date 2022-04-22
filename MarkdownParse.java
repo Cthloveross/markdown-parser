@@ -21,21 +21,25 @@ public class MarkdownParse {
                 int closeBracket = markdown.indexOf("]", openBracket);
                 int openParen = markdown.indexOf("(", closeBracket);
                 int closeParen = markdown.indexOf(")", openParen);
-                toReturn.add(markdown.substring(openParen + 1, closeParen));
-                currentIndex = closeParen + 1;
-                if(closeParen == -1){
+                
+                 if(closeParen == -1){
                     System.out.println("invalid input");
+                    break;
                 }
                 else if(closeBracket == -1){
                     System.out.println("invalid input");
+                    break;
                 }
                 else if(openBracket == -1){
                     System.out.println("invalid input");
+                    break;
                 }
                 else if(openParen == -1){
                     System.out.println("invalid input");
+                    break;
                 }
-                break;
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                currentIndex = closeParen + 1;
                 // System.out.println(currentIndex);
             }
             if(toReturn.size() == 0){
